@@ -8,10 +8,36 @@
 
 import pytest
 
+@pytest.mark.acceptance
+def test_minus():
+    assert all_division(-50, 10, -5) == 1
+
+
+@pytest.mark.smoke
+def test_zero():
+    with pytest.raises(ZeroDivisionError):
+        assert all_division(4, 1, 0, 2)
+
+
+@pytest.mark.acceptance
+def test_float():
+    assert all_division(25.5, 2.5, 12) == 0.85
+
+@pytest.mark.acceptance
+def test_first_zero():
+    assert all_division(0, 2, 10000, 2345) == 0
+
+@pytest.mark.smoke
+def test_plus():
+    assert all_division(300, 25, 6, 2) == 1
+
 
 def all_division(*arg1):
-
     division = arg1[0]
     for i in arg1[1:]:
         division /= i
     return division
+
+
+
+
