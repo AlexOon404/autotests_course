@@ -11,6 +11,12 @@ def all_division(*arg1):
         division /= i
     return division
 
-
+@pytest.mark.parametrize('a,b,c,d,e,result',[pytest.param(0, 2, 10000, 2345,32424, 0, marks=pytest.mark.acceptance),
+                                          pytest.param(-50, 5, -5, -1, 2, -1, marks=pytest.mark.acceptance),
+                                          pytest.param(4, 1, 0, 2, 3, ZeroDivisionError, marks=pytest.mark.skip('Чиним')),
+                                          pytest.param(25.5, 2.5, 12, 2, 5, 0.085, marks=pytest.mark.skip('Чиним')),
+                                          pytest.param(300, 25, 6, 2, 1, 1, marks=pytest.mark.smoke)])
+def test_division(a, b, c, d, e, result):
+    assert all_division(a, b, c, d, e) == result
 
 
